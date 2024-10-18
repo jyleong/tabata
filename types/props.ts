@@ -20,8 +20,10 @@ export enum WorkoutState {
 export interface CountdownTimerProps {
     duration: number;
     workoutState: WorkoutState;
+    onComplete: () => void;
 }
 
 export interface TimeRenderProps {
     remainingTime: number;
+    onComplete: () => void;
 }

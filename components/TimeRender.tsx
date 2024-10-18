@@ -3,7 +3,7 @@
 import React, { useState, useRef } from 'react';
 import { TimeRenderProps } from '../types/props';
 
-const TimeRender = ({ remainingTime }: TimeRenderProps) => {
+const TimeRender = ({ remainingTime, onComplete }: TimeRenderProps) => {
     const currentTime = useRef(remainingTime);
     const prevTime = useRef<number | null>(null);
 
@@ -18,8 +18,9 @@ const TimeRender = ({ remainingTime }: TimeRenderProps) => {
         isNewTimeFirstTick.current = false;
     }
 
-    // force one last re-render when the time is over to tirgger the last animation
+    // force one last re-render when the time is over to trigger the last animation
     if (remainingTime === 0) {
+        onComplete();
         setTimeout(() => {
         setOneLastRerender((val: number) => val + 1);
         }, 20);
@@ -34,8 +35,8 @@ const TimeRender = ({ remainingTime }: TimeRenderProps) => {
         </div>
         {prevTime.current !== null && (
             <div
-            key={prevTime.current}
-            className={`time ${!isTimeUp ? "down" : ""}`}
+                key={prevTime.current}
+                className={`time ${!isTimeUp ? "down" : ""}`}
             >
             {prevTime.current}
             </div>

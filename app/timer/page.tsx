@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React, { useState }from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 
 import CountdownTimer from '@components/CountdownTimer';
@@ -17,19 +17,55 @@ function useGetAllSearchParams() {
   };
 const Timer = () => {
     const params = useGetAllSearchParams();
-    console.log("In Timer: ", params);
-    // take in the props being sent from submit
-    // it will have to be a timer progress animation that executes
-    // the timer for X seconds for working set
-    // Y seconds for a rest set
-    // There will be W seconds rest between sets
-    // and done Z rounds
-    // after it is all done
+    const numSets = parseInt(params.sets);
+    const numCycles = parseInt(params.cycles);
+    const prepareTime: number = parseInt(params.prepareTime);
+    const workoutSetTime: number = parseInt(params.workTime);
+    const restTime: number = parseInt(params.restTime);
+    const restBetweenSets: number = parseInt(params.restBetweenSets);
+
+    const timerConfigurations = [
+        { label: 'Prepare', duration: prepareTime, state: WorkoutState.PREPARE },
+      ];
+      
+      for (let set = 0; set < numSets; set++) {
+        for (let cycle = 0; cycle < numCycles; cycle++) {
+          timerConfigurations.push({
+            label: `Workout Set ${set*cycle + 1}`,
+            duration: workoutSetTime,
+            state: WorkoutState.WORKSET,
+          });
+          timerConfigurations.push({
+            label: 'Rest',
+            duration: restTime,
+            state: WorkoutState.REST,
+          });
+        }
+        if (set < numSets - 1) {
+          timerConfigurations.push({
+            label: 'Rest between sets',
+            duration: restBetweenSets,
+            state: WorkoutState.REST_BETWEEN_SETS
+          });
+        }
+      }
+      
+    const [currentTimerIndex, setCurrentTimerIndex] = useState(0);
+    
+    const handleTimerComplete = () => { setCurrentTimerIndex(currentTimerIndex + 1) };
     return (
-        <CountdownTimer
-            duration={parseInt(params.prepareTime)}
-            workoutState={WorkoutState.PREPARE}
-        />
+        <div>
+    {currentTimerIndex < timerConfigurations.length ? (
+      <CountdownTimer
+        key={currentTimerIndex}
+        duration={parseInt(timerConfigurations[currentTimerIndex].duration)}
+        workoutState={timerConfigurations[currentTimerIndex].state}
+        onComplete={handleTimerComplete}
+      />
+    ) : (
+      <div>Timers complete!</div>
+    )}
+  </div>
     )
 };
 

@@ -157,6 +157,10 @@ body {
     @apply bg-blue-500 rounded-full p-2 text-white font-bold;
 }
 
+.button-circle-z {
+    z-index: 1;
+}
+
 .button-circle:hover {
     @apply bg-blue-700;
 }
@@ -190,15 +194,16 @@ body {
     transform: translateY(0);
     opacity: 1;
     transition: all 0.2s;
+    pointer-events: none;
 }
   
 .time-wrapper .time.up {
     opacity: 0;
-    transform: translateY(-100%);
+    transform: translateY(-50%);
 }
   
 .time-wrapper .time.down {
     opacity: 0;
-    transform: translateY(100%);
+    transform: translateY(50%);
 }
   
