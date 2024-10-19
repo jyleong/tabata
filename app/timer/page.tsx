@@ -1,72 +1,13 @@
-'use client'
-import React, { useState }from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
+import React, { Suspense } from 'react';
 
-import CountdownTimer from '@components/CountdownTimer';
-import { WorkoutState } from '../../types/props';
+import TimerParams from '@components/TimerParams';
+const TimerPage = () => {
 
-function useGetAllSearchParams() {
-    const searchParams = useSearchParams();
-    const params: { [anyProp: string]: string } = {};
-  
-    searchParams.forEach((value, key) => {
-      params[key] = value;
-    });
-  
-    return params;
-  };
-const Timer = () => {
-    const params = useGetAllSearchParams();
-    const numSets = parseInt(params.sets);
-    const numCycles = parseInt(params.cycles);
-    const prepareTime: number = parseInt(params.prepareTime);
-    const workoutSetTime: number = parseInt(params.workTime);
-    const restTime: number = parseInt(params.restTime);
-    const restBetweenSets: number = parseInt(params.restBetweenSets);
-
-    const timerConfigurations = [
-        { label: 'Prepare', duration: prepareTime, state: WorkoutState.PREPARE },
-      ];
-      
-      for (let set = 0; set < numSets; set++) {
-        for (let cycle = 0; cycle < numCycles; cycle++) {
-          timerConfigurations.push({
-            label: `Workout Set ${set*cycle + 1}`,
-            duration: workoutSetTime,
-            state: WorkoutState.WORKSET,
-          });
-          timerConfigurations.push({
-            label: 'Rest',
-            duration: restTime,
-            state: WorkoutState.REST,
-          });
-        }
-        if (set < numSets - 1) {
-          timerConfigurations.push({
-            label: 'Rest between sets',
-            duration: restBetweenSets,
-            state: WorkoutState.REST_BETWEEN_SETS
-          });
-        }
-      }
-      
-    const [currentTimerIndex, setCurrentTimerIndex] = useState(0);
-    
-    const handleTimerComplete = () => { setCurrentTimerIndex(currentTimerIndex + 1) };
     return (
-        <div>
-    {currentTimerIndex < timerConfigurations.length ? (
-      <CountdownTimer
-        key={currentTimerIndex}
-        duration={parseInt(timerConfigurations[currentTimerIndex].duration)}
-        workoutState={timerConfigurations[currentTimerIndex].state}
-        onComplete={handleTimerComplete}
-      />
-    ) : (
-      <div>Timers complete!</div>
-    )}
-  </div>
+        <Suspense fallback={<div>Loading...</div>}>
+            <TimerParams />
+        </Suspense>
     )
 };
 
-export default Timer;
+export default TimerPage;
