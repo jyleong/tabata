@@ -27,3 +27,8 @@ export interface TimeRenderProps {
     remainingTime: number;
     onComplete: () => void;
 }
+
+export interface SummaryModalProps {
+    summary: string;
+    onClose: () => void;
+}

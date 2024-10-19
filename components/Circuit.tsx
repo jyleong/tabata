@@ -3,7 +3,7 @@
 import React, { useState }  from 'react';
 import { useSearchParams, useRouter } from 'next/navigation'
 import SetInput from '@components/SetInput';
-// TODO type props
+import SummaryModal from '@components/SummaryModal';
 
 const Circuit = () => {
 
@@ -13,6 +13,8 @@ const Circuit = () => {
     const [cycles, setCycles] = useState(10);
     const [sets, setSets] = useState(5);
     const [restBetweenSets, setRestBetweenSets] = useState(30);
+    const [isSummaryModalOpen, setIsSummaryModalOpen] = useState(false);
+    const [summary, setSummary] = useState('');
 
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -102,12 +104,16 @@ const Circuit = () => {
           Rest between sets time: ${formatTime(restBetweenSets * (cycles-1))}
         `;
       
-        alert(summary);
+        setIsSummaryModalOpen(true);
+        setSummary(summary);
       };
 
     return (
         <div className="w-full flex flex-col text-center">
             <button onClick={handleSummaryClick}>Summary</button>
+            {isSummaryModalOpen && (
+                <SummaryModal summary={summary} onClose={() => setIsSummaryModalOpen(false)} />
+            )}
 
             <form
                 className="w-full flex flex-col items-center justify-center gap-4"
