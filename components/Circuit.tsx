@@ -112,7 +112,10 @@ const Circuit = () => {
         <div className="w-full flex flex-col text-center">
             <button onClick={handleSummaryClick}>Summary</button>
             {isSummaryModalOpen && (
-                <SummaryModal summary={summary} onClose={() => setIsSummaryModalOpen(false)} />
+                <SummaryModal
+                    summary={summary}
+                    onClose={() => setIsSummaryModalOpen(false)}
+                />
             )}
 
             <form

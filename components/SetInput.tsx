@@ -8,14 +8,14 @@ const SetInput: React.FC<SetInputProps> = ({ label, value, handleDecrement, hand
   return (
     <div className="w-full flex flex-col">
       <label className="mb-2 font-extrabold">{label}</label>
-      <div className="items-center">
+      <div className="input-group items-center">
         <button
         className="mr-2 button-circle"
         onClick={handleDecrement}>
             -
         </button>
         <input
-          className="set-input-wide"
+          className="set-input-med"
           type="number"
           value={value}
           onChange={handleInputChange}

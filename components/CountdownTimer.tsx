@@ -36,7 +36,7 @@ const CountdownTimer = ({ duration, workoutState, onComplete }: CountdownTimerPr
                     )}
                 </CountdownCircleTimer>
                 <button 
-                    className="button-circle .button-circle-z py-4 px-4 rounded mt-6"
+                    className="button-rounded .button-rounded-z py-4 px-4 rounded mt-6"
                     onClick={handlePlayPause}
                 >
                     {isPlaying ? "Pause" : "Play"}

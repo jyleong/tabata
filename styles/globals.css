@@ -149,12 +149,51 @@ body {
 }
 
 /* SetInput styles */
-.set-input-wide {
-    @apply min-w-80 md:w-64 border border-gray-300 px-2 py-1 rounded-md;
+.input-group {
+    /* display: flex; */
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+    .input-group {
+        flex-direction: column;
+        align-items: center;
+    }
+    .set-input-med {
+        @apply min-w-40 md:w-64 border border-gray-300 px-2 py-1 rounded-md;
+    }
+}
+
+.set-input-med {
+    @apply min-w-60 md:w-64 border border-gray-300 px-2 py-1 rounded-md;
+}
+
+.button-rounded {
+    @apply bg-blue-500 rounded-full text-white font-bold;
+}
+
+.button-rounded-z {
+    z-index: 1;
+}
+
+.button-rounded:hover {
+    @apply bg-blue-700;
+}
+
+.button-rounded:active {
+    @apply bg-blue-900;
+}
+
+.button-rounded:disabled {
+    @apply bg-blue-200 text-gray-500;
 }
 
 .button-circle {
-    @apply bg-blue-500 rounded-full p-2 text-white font-bold;
+    @apply bg-blue-500 rounded-full text-white font-bold;
+    width: 30px;
+    height: 30px;
+    margin: 0 10px;
 }
 
 .button-circle-z {
@@ -243,4 +282,9 @@ body {
 .summary-modal-btn:hover {
     background-color: #ff3333; /* Darken the red background on hover */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); 
+}
+
+.summary-text {
+    white-space: pre-wrap;
+    text-align: left;
 }
