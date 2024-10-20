@@ -33,7 +33,7 @@ const TimerParams = () => {
       for (let set = 0; set < numSets; set++) {
         for (let cycle = 0; cycle < numCycles; cycle++) {
           timerConfigurations.push({
-            label: `Workout Set ${set*cycle + 1}`,
+            label: `Set ${set + 1} - Cycle ${cycle + 1}`,
             duration: workoutSetTime,
             state: WorkoutState.WORKSET,
           });
@@ -60,6 +60,7 @@ const TimerParams = () => {
     {currentTimerIndex < timerConfigurations.length ? (
       <CountdownTimer
         key={currentTimerIndex}
+        label={timerConfigurations[currentTimerIndex].label}
         duration={timerConfigurations[currentTimerIndex].duration}
         workoutState={timerConfigurations[currentTimerIndex].state}
         onComplete={handleTimerComplete}

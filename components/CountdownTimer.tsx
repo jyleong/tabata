@@ -11,7 +11,7 @@ const stateToColor = {
     [WorkoutState.REST_BETWEEN_SETS]: 'FF3B3F', // red
   };
 
-const CountdownTimer = ({ duration, workoutState, onComplete }: CountdownTimerProps) => {
+const CountdownTimer = ({ label, duration, workoutState, onComplete }: CountdownTimerProps) => {
     const [isPlaying, setIsPlaying] = useState(true);
 
     const handlePlayPause = () => {
@@ -20,7 +20,7 @@ const CountdownTimer = ({ duration, workoutState, onComplete }: CountdownTimerPr
     return (
         <div className="flex flex-col items-center">
             <h1 className="text-4xl font-bold text-center mb-4">
-                {workoutState}
+                {label}
             </h1>
             <div className="timer-wrapper">
                 <CountdownCircleTimer

@@ -18,6 +18,7 @@ export enum WorkoutState {
 }
 
 export interface CountdownTimerProps {
+    label: string;
     duration: number;
     workoutState: WorkoutState;
     onComplete: () => void;
