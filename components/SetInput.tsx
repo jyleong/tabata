@@ -10,8 +10,9 @@ const SetInput: React.FC<SetInputProps> = ({ label, value, handleDecrement, hand
       <label className="mb-2 font-extrabold">{label}</label>
       <div className="input-group items-center">
         <button
-        className="mr-2 button-circle"
-        onClick={handleDecrement}>
+            type="button"
+            className="mr-2 button-circle"
+            onClick={handleDecrement}>
             -
         </button>
         <input
@@ -22,8 +23,11 @@ const SetInput: React.FC<SetInputProps> = ({ label, value, handleDecrement, hand
           style={{ width: '50px', textAlign: 'center' }}
         />
         <button
-        className="ml-2 button-circle"
-        onClick={handleIncrement}>+</button>
+            type="button"
+            className="ml-2 button-circle"
+            onClick={handleIncrement}>
+            +
+        </button>
       </div>
     </div>
   );
